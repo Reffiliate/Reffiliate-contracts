@@ -10,13 +10,13 @@ contract TestCampaignFactory is Test {
     using SafeERC20 for IERC20;
 
     address private constant USER_ADDRESS = 0xB4873900Ae62Ac4b752366eB1c04191693b37B17;
-    address private constant DAPP_ADDRESS = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
+    address private constant DAPP_ADDRESS = 0x43c37c4D2F337CC3eA3d42CfC68b05255Cc89b80;
     address private constant TOKEN_ADDRESS = 0x6d8727B664D3f877de683F836E75EB2de47FD197;
     CampaignFactory factory;
 
     function setUp() public {
         factory = new CampaignFactory();
-        deal(TOKEN_ADDRESS, USER_ADDRESS, 100);
+        deal(TOKEN_ADDRESS, USER_ADDRESS, 100 * 1e18);
     }
 
     function testCreateCampaign() public {
@@ -27,11 +27,11 @@ contract TestCampaignFactory is Test {
 
         factory.createCampaign(owner, dApp);
         address campaignAddress = factory.getCampaign(owner, dApp);
-        IERC20(TOKEN_ADDRESS).approve(campaignAddress, 100);
+        IERC20(TOKEN_ADDRESS).approve(campaignAddress, 100 * 1e18);
         Campaign campaign = Campaign(campaignAddress);
 
         address token = TOKEN_ADDRESS;
-        uint256 fund = 100;
+        uint256 fund = 100 * 1e18;
         uint256 transactionReward = 1;
         uint256 referralReward = 5;
 

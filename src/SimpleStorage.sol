@@ -8,6 +8,10 @@ contract SimpleStorage {
         value = _value;
     }
 
+    function inc(uint256 x) public {
+        value = value + x;
+    }
+
     function retrieve() public view returns (uint256) {
         return value;
     }

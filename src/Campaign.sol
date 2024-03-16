@@ -47,9 +47,6 @@ contract Campaign is ICampaign {
 
     function endCampaign() public onlyOwner onlyRunning override {
         isRunning = false;
-        token = address(0);
-        fund = 0;
-        totalReward = 0;
         IERC20(token).safeTransfer(owner, fund - totalReward);
         emit EndCampaign(totalReward);
     }
@@ -86,20 +83,28 @@ contract Campaign is ICampaign {
         }
     }
 
-    function executeTransaction(bytes memory data) public override returns (bytes memory) {
+    function executeTransaction(address user, bytes memory data) public override returns (bytes memory) {
         uint256 startGas = gasleft();
         (bool success, bytes memory res) = dApp.delegatecall(data);
         require(success, "Transaction failed");
         uint256 gasUsed = startGas - gasleft();
-        addTransaction(msg.sender, gasUsed);
+        addTransaction(user, gasUsed);
         return res;
     }
 
+    function getReward(address user) public view returns (uint256 amount) {
+        return rewards[user];
+    }
+ 
     function claimReward(address user) public override onlyNotRunning returns (uint256 amount) {
         amount = rewards[user];
         require(amount > 0, "No reward to claim");
         rewards[user] = 0;
         IERC20(token).safeTransfer(user, amount);
+    }
+
+    function getInfomation() public view returns (address, uint256 totalFund, uint256 remainFund, uint256, uint256, bool) {
+        return (token, fund, fund - totalReward, referralReward, transactionReward, isRunning);
     }
 
     modifier onlyNotRunning() {

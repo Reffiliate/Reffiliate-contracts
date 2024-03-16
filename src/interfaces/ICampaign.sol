@@ -22,7 +22,7 @@ interface ICampaign {
 
     function addTransaction(address user, uint256 fee) external;
 
-    function executeTransaction(bytes memory data) external returns (bytes memory res);
+    function executeTransaction(address user, bytes memory data) external returns (bytes memory res);
 
     function claimReward(address user) external returns (uint256 amount);
 }
