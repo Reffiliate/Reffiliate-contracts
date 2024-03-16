@@ -10,7 +10,7 @@ contract TestCampaignFactory is Test {
     using SafeERC20 for IERC20;
 
     address private constant USER_ADDRESS = 0xB4873900Ae62Ac4b752366eB1c04191693b37B17;
-    address private constant DAPP_ADDRESS = 0x43c37c4D2F337CC3eA3d42CfC68b05255Cc89b80;
+    address private constant DAPP_ADDRESS = 0xaD9DB1c0098A1FC95E686E93aC5D818838468263;
     address private constant TOKEN_ADDRESS = 0x6d8727B664D3f877de683F836E75EB2de47FD197;
     CampaignFactory factory;
 

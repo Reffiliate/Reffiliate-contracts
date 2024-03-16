@@ -10,7 +10,7 @@ import "forge-std/console.sol";
 contract TestCampaign is Test { 
     address private constant OWNER_ADDRESS = 0xB4873900Ae62Ac4b752366eB1c04191693b37B17;
     address private USER_ADDRESS = 0x9f05e3f61a93af744112fBAa880b1aF8e1935fb8;
-    address private constant DAPP_ADDRESS = 0x43c37c4D2F337CC3eA3d42CfC68b05255Cc89b80;
+    address private constant DAPP_ADDRESS = 0xaD9DB1c0098A1FC95E686E93aC5D818838468263;
     address private constant TOKEN_ADDRESS = 0x6d8727B664D3f877de683F836E75EB2de47FD197;
 
     CampaignFactory factory;
@@ -65,6 +65,7 @@ contract TestCampaign is Test {
         campaign.executeTransaction(USER_ADDRESS, abi.encodeWithSignature("store(uint256)", value));
         uint256 rewardAmount = campaign.getReward(USER_ADDRESS);
         console.log("reward amount: ", rewardAmount);
+        console.log(dApp.retrieve());
 
         uint256 x = 3;
         campaign.executeTransaction(USER_ADDRESS, abi.encodeWithSignature("inc(uint256)", x));
@@ -78,8 +79,6 @@ contract TestCampaign is Test {
     function testClaimReward() public {
         vm.startBroadcast(USER_ADDRESS);
         uint256 value = 7;
-        console.log(DAPP_ADDRESS);
-        console.log(address(dApp));
         campaign.executeTransaction(USER_ADDRESS, abi.encodeWithSignature("store(uint256)", value));
         uint256 rewardAmount = campaign.getReward(USER_ADDRESS);
         console.log("reward amount: ", rewardAmount);
