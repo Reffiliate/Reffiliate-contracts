@@ -1,3 +1,8 @@
+## Deployment address
+- **Linea Testnet**: https://goerli.lineascan.build/address/0x6751fDBa5855c910e34F883427f889E5A641fc7D
+- **zkEVM Polygon Testnet**: https://testnet-zkevm.polygonscan.com/address/0xC8B7fb2b11C6157e639fE468A60379F486541FB2
+
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
